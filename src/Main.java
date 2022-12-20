@@ -25,14 +25,12 @@ public class Main {
 
         // Поиск минимальной зарплаты
         System.out.println("Поиск минимальной зарплаты");
-        Employee minSalaryPerson = employeeBook.findMinSalaryPerson();
-        System.out.println("id: " + minSalaryPerson.getId() + " " + minSalaryPerson.getFullName() + " " + "Salary: " + minSalaryPerson.getSalary());
+        System.out.println(employeeBook.findMinSalaryPerson());
         System.out.println();
 
         // Поиск максимальной зарплаты
         System.out.println("Поиск максимальной зарплаты");
-        Employee maxSalaryPerson = employeeBook.findMaxSalaryPerson();
-        System.out.println("id: " + maxSalaryPerson.getId() + " " + maxSalaryPerson.getFullName() + " " + "Salary: " + maxSalaryPerson.getSalary());
+        System.out.println(employeeBook.findMaxSalaryPerson());
         System.out.println();
 
         // Подсчёт средней зарплаты
@@ -58,14 +56,12 @@ public class Main {
 
         // Поиск минимальной зарплаты по отделу
         System.out.println("Поиск минимальной зарплаты по отделу");
-        Employee minSalaryPersonByDep = employeeBook.findMinSalaryPersonByDep(2);
-        System.out.println("id: " + minSalaryPersonByDep.getId() + " " + minSalaryPersonByDep.getFullName() + " " + "Salary: " + minSalaryPersonByDep.getSalary());
+        System.out.println(employeeBook.findMinSalaryPersonByDep(2));
         System.out.println();
 
         // Поиск максимальной зарплаты по отделу
         System.out.println("Поиск максимальной зарплаты по отделу");
-        Employee maxSalaryPersonByDep = employeeBook.findMaxSalaryPersonByDep(2);
-        System.out.println("id: " + maxSalaryPersonByDep.getId() + " " + maxSalaryPersonByDep.getFullName() + " " + "Salary: " + maxSalaryPersonByDep.getSalary());
+        System.out.println(employeeBook.findMaxSalaryPersonByDep(2));
         System.out.println();
 
         // Подсчёт суммы зарплат по отделу
@@ -101,6 +97,9 @@ public class Main {
         // =========================================
         //        Максимальная сложность
         // =========================================
+
+        System.out.println("Максимальная сложность");
+        System.out.println();
 
         // Удаление сотрудника
         System.out.println("Удаление сотрудника");
