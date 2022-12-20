@@ -9,7 +9,7 @@ public class EmployeeBook {
     public void printAllEmployees() {
         for (Employee employee : employees) {
             if (employee != null) {
-                System.out.printf("id: %d FullName: %s Department: %d Salary: %d%n", employee.getId(), employee.getFullName(), employee.getDepartment(), employee.getSalary());
+                System.out.println(employee);
             }
         }
     }
@@ -175,6 +175,11 @@ public class EmployeeBook {
 
     public void addEmployee(String fullname, int department, int salary) {
         Employee newEmployee = new Employee(fullname, department, salary);
+        int count = 0;
+        for (Employee employee : employees) {
+            if (employee == null) count++;
+        }
+        if (count == 0) throw new RuntimeException("Нет свободных мест");
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null){
                 employees[i] = newEmployee;
