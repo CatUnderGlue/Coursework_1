@@ -104,22 +104,22 @@ public class Main {
         // Удаление сотрудника
         System.out.println("Удаление сотрудника");
         employeeBook.removeEmployee(0);
+        employeeBook.removeEmployee("Колесникова Ульяна Егоровна");
         System.out.println();
 
         // Изменение зарплаты сотрудника по ФИО
         System.out.println("Изменение зарплаты сотрудника по ФИО");
-        employeeBook.setEmployeeSalaryByFullname("Исаева Валерия Степановна", 100_000);
+        employeeBook.setEmployeeSalaryByFullname("Завьялов Пётр Артёмович", 100_000);
         System.out.println();
 
         // Изменение отдела сотрудника по ФИО
         System.out.println("Изменение отдела сотрудника по ФИО");
-        employeeBook.setEmployeeDepartmentByFullname("Исаева Валерия Степановна", 2);
+        employeeBook.setEmployeeDepartmentByFullname("Завьялов Пётр Артёмович", 3);
         System.out.println();
 
         // Вывод всех сотрудников отсортированный по отделам
         System.out.println("Вывод всех сотрудников отсортированный по отделам");
         employeeBook.printAllEmployeesSortByDep();
-
     }
 
     public static void initialiseEmployees(){

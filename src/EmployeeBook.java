@@ -1,5 +1,23 @@
 public class EmployeeBook {
-    private Employee[] employees = new Employee[10];
+    private final Employee[] employees;
+
+    public EmployeeBook() {
+        this.employees = new Employee[10];
+    }
+
+    public boolean isEmployeeNull(Employee employee) {
+        return employee == null;
+    }
+
+    public boolean isEmployeeExistsByFullname(String fullname){
+        boolean flag = false;
+        for (Employee employee : employees) {
+            if (!isEmployeeNull(employee) && employee.getFullName().equalsIgnoreCase(fullname)) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
 
     /*
     ===================================
@@ -8,7 +26,7 @@ public class EmployeeBook {
      */
     public void printAllEmployees() {
         for (Employee employee : employees) {
-            if (employee != null) {
+            if (!isEmployeeNull(employee)) {
                 System.out.println(employee);
             }
         }
@@ -17,7 +35,7 @@ public class EmployeeBook {
     public int calculateSalaryCostsPerMonth() {
         int sum = 0;
         for (Employee employee : employees) {
-            if (employee != null) {
+            if (!isEmployeeNull(employee)) {
                 sum += employee.getSalary();
             }
         }
@@ -28,11 +46,9 @@ public class EmployeeBook {
         Employee person = employees[0];
         int min = findMaxSalaryPerson().getSalary();
         for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getSalary() < min) {
-                    min = employee.getSalary();
-                    person = employee;
-                }
+            if (!isEmployeeNull(employee) && employee.getSalary() < min) {
+                min = employee.getSalary();
+                person = employee;
             }
         }
         return person;
@@ -42,11 +58,9 @@ public class EmployeeBook {
         int max = 0;
         Employee person = employees[0];
         for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getSalary() > max) {
-                    max = employee.getSalary();
-                    person = employee;
-                }
+            if (!isEmployeeNull(employee) && employee.getSalary() > max) {
+                max = employee.getSalary();
+                person = employee;
             }
         }
         return person;
@@ -59,7 +73,7 @@ public class EmployeeBook {
 
     public void printAllFullname() {
         for (Employee employee : employees) {
-            if (employee != null) {
+            if (!isEmployeeNull(employee)) {
                 System.out.println(employee.getFullName());
             }
         }
@@ -85,7 +99,7 @@ public class EmployeeBook {
         Employee person = employees[0];
         int min = findMaxSalaryPersonByDep(department).getSalary();
         for (Employee employee : employees) {
-            if (employee.getSalary() < min && employee.getDepartment() == department) {
+            if (!isEmployeeNull(employee) && employee.getSalary() < min && employee.getDepartment() == department) {
                 min = employee.getSalary();
                 person = employee;
             }
@@ -97,7 +111,7 @@ public class EmployeeBook {
         Employee person = employees[0];
         int max = 0;
         for (Employee employee : employees) {
-            if (employee.getSalary() > max && employee.getDepartment() == department) {
+            if (!isEmployeeNull(employee) && employee.getSalary() > max && employee.getDepartment() == department) {
                 max = employee.getSalary();
                 person = employee;
             }
@@ -108,7 +122,7 @@ public class EmployeeBook {
     public int calculateSalaryCostsPerMonthByDep(int department) {
         int sum = 0;
         for (Employee employee : employees) {
-            if (employee.getDepartment() == department) {
+            if (!isEmployeeNull(employee) && employee.getDepartment() == department) {
                 sum += employee.getSalary();
             }
         }
@@ -121,7 +135,7 @@ public class EmployeeBook {
         int employeesCount = 0;
         int salarySum = 0;
         for (Employee employee : employees) {
-            if (employee.getDepartment() == department) {
+            if (!isEmployeeNull(employee) && employee.getDepartment() == department) {
                 salarySum += employee.getSalary();
                 employeesCount += 1;
             }
@@ -131,7 +145,7 @@ public class EmployeeBook {
 
     public void indexSalaryByDep(int percent, int department) {
         for (Employee employee : employees) {
-            if (employee.getDepartment() == department) {
+            if (!isEmployeeNull(employee) && employee.getDepartment() == department) {
                 int salary = employee.getSalary();
                 salary += (salary / 100) * percent;
                 employee.setSalary(salary);
@@ -141,7 +155,7 @@ public class EmployeeBook {
 
     public void printAllEmployeesByDep(int department) {
         for (Employee employee : employees) {
-            if (employee.getDepartment() == department) {
+            if (!isEmployeeNull(employee) && employee.getDepartment() == department) {
                 System.out.printf("id: %d FullName: %s Salary: %d%n", employee.getId(), employee.getFullName(), employee.getSalary());
             }
         }
@@ -149,20 +163,16 @@ public class EmployeeBook {
 
     public void printAllEmployeesWithSalaryLessThan(int nSalary) {
         for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getSalary() < nSalary) {
-                    System.out.printf("id: %d FullName: %s Salary: %d%n", employee.getId(), employee.getFullName(), employee.getSalary());
-                }
+            if (!isEmployeeNull(employee) && employee.getSalary() < nSalary) {
+                System.out.printf("id: %d FullName: %s Salary: %d%n", employee.getId(), employee.getFullName(), employee.getSalary());
             }
         }
     }
 
     public void printAllEmployeesWithSalaryMoreThan(int nSalary) {
         for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getSalary() >= nSalary) {
-                    System.out.printf("id: %d FullName: %s Salary: %d%n", employee.getId(), employee.getFullName(), employee.getSalary());
-                }
+            if (!isEmployeeNull(employee) && employee.getSalary() >= nSalary) {
+                System.out.printf("id: %d FullName: %s Salary: %d%n", employee.getId(), employee.getFullName(), employee.getSalary());
             }
         }
     }
@@ -177,11 +187,11 @@ public class EmployeeBook {
         Employee newEmployee = new Employee(fullname, department, salary);
         int count = 0;
         for (Employee employee : employees) {
-            if (employee == null) count++;
+            if (isEmployeeNull(employee)) count++;
         }
         if (count == 0) throw new RuntimeException("Нет свободных мест");
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null){
+            if (isEmployeeNull(employees[i])) {
                 employees[i] = newEmployee;
                 break;
             }
@@ -189,36 +199,42 @@ public class EmployeeBook {
     }
 
     public void removeEmployee(int id) {
-        if (employees[id] != null) {
-            employees[id] = null;
-        }
+        employees[id] = null;
     }
 
-    public void removeEmployee(String fullName) {
-        for (Employee employee : employees) {
-            if (employee.getFullName().equalsIgnoreCase(fullName)) {
-                employee = null;
+    public void removeEmployee(String fullname) {
+        if (isEmployeeExistsByFullname(fullname)) {
+            for (int i = 0; i < employees.length; i++) {
+                if (!isEmployeeNull(employees[i]) && employees[i].getFullName().equalsIgnoreCase(fullname)) {
+                    employees[i] = null;
+                }
             }
+        } else {
+            throw new IllegalArgumentException("Указанный работник не найден");
         }
     }
 
     public void setEmployeeSalaryByFullname(String fullname, int salary) {
-        for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getFullName().equalsIgnoreCase(fullname)) {
+        if (isEmployeeExistsByFullname(fullname)) {
+            for (Employee employee : employees) {
+                if (!isEmployeeNull(employee) && employee.getFullName().equalsIgnoreCase(fullname)) {
                     employee.setSalary(salary);
                 }
             }
+        } else {
+            throw new IllegalArgumentException("Указанный работник не найден");
         }
     }
 
     public void setEmployeeDepartmentByFullname(String fullname, int department) {
-        for (Employee employee : employees) {
-            if (employee != null) {
-                if (employee.getFullName().equalsIgnoreCase(fullname)) {
+        if (isEmployeeExistsByFullname(fullname)) {
+            for (Employee employee : employees) {
+                if (!isEmployeeNull(employee) && employee.getFullName().equalsIgnoreCase(fullname)) {
                     employee.setDepartment(department);
                 }
             }
+        } else {
+            throw new IllegalArgumentException("Указанный работник не найден");
         }
     }
 
@@ -228,7 +244,7 @@ public class EmployeeBook {
         for (int i = 1; i <= 5; i++) {
             System.out.println("Отдел №" + i);
             for (Employee employee : employees) {
-                if (employee != null) {
+                if (!isEmployeeNull(employee)) {
                     if (employee.getDepartment() == i) {
                         System.out.println(employee.getFullName());
                     }
