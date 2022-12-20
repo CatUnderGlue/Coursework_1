@@ -5,15 +5,16 @@ public class EmployeeBook {
         this.employees = new Employee[10];
     }
 
-    public boolean isEmployeeNull(Employee employee) {
+    private boolean isEmployeeNull(Employee employee) {
         return employee == null;
     }
 
-    public boolean isEmployeeExistsByFullname(String fullname){
+    public boolean isEmployeeExistsByFullname(String fullname) {
         boolean flag = false;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getFullName().equalsIgnoreCase(fullname)) {
                 flag = true;
+                break;
             }
         }
         return flag;
@@ -44,7 +45,7 @@ public class EmployeeBook {
 
     public Employee findMinSalaryPerson() {
         Employee person = employees[0];
-        int min = findMaxSalaryPerson().getSalary();
+        int min = Integer.MAX_VALUE;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getSalary() < min) {
                 min = employee.getSalary();
@@ -68,7 +69,13 @@ public class EmployeeBook {
 
     public double calculateAverageSalary() {
         int salarySum = calculateSalaryCostsPerMonth();
-        return (double) salarySum / employees.length;
+        int count = 0;
+        for (Employee employee : employees) {
+            if (!isEmployeeNull(employee)) {
+                count++;
+            }
+        }
+        return (double) salarySum / count;
     }
 
     public void printAllFullname() {
@@ -97,7 +104,7 @@ public class EmployeeBook {
 
     public Employee findMinSalaryPersonByDep(int department) {
         Employee person = employees[0];
-        int min = findMaxSalaryPersonByDep(department).getSalary();
+        int min = Integer.MAX_VALUE;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getSalary() < min && employee.getDepartment() == department) {
                 min = employee.getSalary();
@@ -187,9 +194,13 @@ public class EmployeeBook {
         Employee newEmployee = new Employee(fullname, department, salary);
         int count = 0;
         for (Employee employee : employees) {
-            if (isEmployeeNull(employee)) count++;
+            if (isEmployeeNull(employee)){
+                count++;
+            }
         }
-        if (count == 0) throw new RuntimeException("Нет свободных мест");
+        if (count == 0){
+            throw new RuntimeException("Нет свободных мест");
+        }
         for (int i = 0; i < employees.length; i++) {
             if (isEmployeeNull(employees[i])) {
                 employees[i] = newEmployee;

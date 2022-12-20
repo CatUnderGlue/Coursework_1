@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Employee {
-    public static int idCount = 0;
+    private static int idCount = 0;
     private final String fullName;
     private int department;
     private int salary;
