@@ -50,10 +50,18 @@ public class Employee {
     }
 
     public void setDepartment(int department) {
-        this.department = department;
+        if (department < 1 || department > 5){
+            throw new IllegalArgumentException("Существует только 5 отделов");
+        } else {
+            this.department = department;
+        }
     }
 
     public void setSalary(int salary) {
-        this.salary = salary;
+        if (salary < 0){
+            throw new IllegalArgumentException("Вы ввели отрицательную зарплату");
+        } else {
+            this.salary = salary;
+        }
     }
 }

@@ -44,7 +44,7 @@ public class EmployeeBook {
     }
 
     public Employee findMinSalaryPerson() {
-        Employee person = employees[0];
+        Employee person = null;
         int min = Integer.MAX_VALUE;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getSalary() < min) {
@@ -57,7 +57,7 @@ public class EmployeeBook {
 
     public Employee findMaxSalaryPerson() {
         int max = 0;
-        Employee person = employees[0];
+        Employee person = null;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getSalary() > max) {
                 max = employee.getSalary();
@@ -103,7 +103,7 @@ public class EmployeeBook {
     }
 
     public Employee findMinSalaryPersonByDep(int department) {
-        Employee person = employees[0];
+        Employee person = null;
         int min = Integer.MAX_VALUE;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getSalary() < min && employee.getDepartment() == department) {
@@ -115,7 +115,7 @@ public class EmployeeBook {
     }
 
     public Employee findMaxSalaryPersonByDep(int department) {
-        Employee person = employees[0];
+        Employee person = null;
         int max = 0;
         for (Employee employee : employees) {
             if (!isEmployeeNull(employee) && employee.getSalary() > max && employee.getDepartment() == department) {
